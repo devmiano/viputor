@@ -16,7 +16,7 @@ def get_user(request, pk):
 
 
 @api_view(['POST'])
-def create_patron(request):
+def new_creator(request):
     try:
         data = request.data
         city = data['city']
@@ -25,12 +25,35 @@ def create_patron(request):
         user_id = data['user_id']
         user = User.objects.get(id=user_id)
     except:
-        return Response({'error': 'The user_id provided doesnot exist. Try again'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'error': 'The user_id provided does not exist. Try again'}, status=status.HTTP_404_NOT_FOUND)
 
     user.city = city
     user.address = address
     user.location = location
-    user.is_patron = True
+    user.is_creator = True
+    user.save()
+
+    serializer = UserSerializer(user)
+
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def new_moderator(request):
+    try:
+        data = request.data
+        city = data['city']
+        address = data['address']
+        location = data['location']
+        user_id = data['user_id']
+        user = User.objects.get(id=user_id)
+    except:
+        return Response({'error': 'The user_id provided does not exist. Try again'}, status=status.HTTP_404_NOT_FOUND)
+
+    user.city = city
+    user.address = address
+    user.location = location
+    user.is_moderator = True
     user.save()
 
     serializer = UserSerializer(user)
