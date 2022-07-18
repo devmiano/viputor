@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from cloudinary.models import CloudinaryField
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
@@ -30,8 +31,8 @@ class UserProfileManager(BaseUserManager):
         )
 
         user.is_staff = True
-        user.is_user = True
-        user.is_patron = True
+        user.is_member = True
+        user.is_creator = True
         user.is_moderator = True
         user.is_superuser = True
         user.set_password(password)
@@ -54,8 +55,8 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
-    is_user = models.BooleanField(default=True)
-    is_patron = models.BooleanField(default=False)
+    is_member = models.BooleanField(default=True)
+    is_creator = models.BooleanField(default=False)
     is_moderator = models.BooleanField(default=False)
 
     objects = UserProfileManager()
@@ -71,3 +72,8 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+    # photo = CloudinaryField(null=True)
+    # banner = CloudinaryField(null=True)
+    # about = models.TextField(null=True)
+    # headline = models.CharField(max_length=255, null=True)

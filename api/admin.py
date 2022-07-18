@@ -8,12 +8,12 @@ class UserProfileAdmin(UserAdmin):
 
     readonly_fields = ('last_login', 'joined')
 
-    list_display = ('name', 'email', 'contact', 'is_patron',
-                    'is_user', 'is_staff', 'is_superuser',)
+    list_display = ('name', 'email', 'contact', 'is_creator',
+                    'is_member', 'is_staff', 'is_superuser',)
     search_fields = ('name', 'contact', 'email')
 
     list_filter = [
-        'is_staff', 'is_superuser', 'is_patron', 'is_user', 'is_moderator',
+        'is_staff', 'is_superuser', 'is_creator', 'is_member', 'is_moderator',
     ]
 
     fieldsets = (
@@ -52,8 +52,8 @@ class UserProfileAdmin(UserAdmin):
                 'fields': (
                     'is_active',
                     'is_staff',
-                    'is_user',
-                    'is_patron',
+                    'is_member',
+                    'is_creator',
                     'is_moderator',
                     'is_superuser',
                 )
@@ -74,8 +74,8 @@ class UserProfileAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide', 'extrapretty'),
-            'fields': ('name', 'email', 'contact', 'is_user',
-                       'is_patron', 'is_moderator', 'password1', 'password2'),
+            'fields': ('name', 'email', 'contact', 'is_member',
+                       'is_creator', 'is_moderator', 'password1', 'password2'),
         }),
     )
 
