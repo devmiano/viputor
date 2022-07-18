@@ -10,7 +10,7 @@ const Home: NextPage = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<main className=''>
+			<main className='prose'>
 				<h1 className=''>
 					Welcome to <a href='https://nextjs.org'>Viputor</a>
 				</h1>
